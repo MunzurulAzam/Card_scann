@@ -53,9 +53,14 @@ class _RecognizePageState extends State<RecognizePage> {
 
     log(image.filePath!);
     final RecognizedText recognizedText =
-        await textRecognizer.processImage(image);
+         await textRecognizer.processImage(image);
 
-    controller.text = recognizedText.text;
+    final RegExp nameRegExp = RegExp(r'([A-Z][a-z]+)\s([A-Z][a-z]+)\s([A-Z][a-z]+)');
+    // final RegExp nameRegExp = RegExp(r'^([A-Z][a-z]+)\s([A-Z][a-z]+)(?:\s([A-Z]\.)\s?)?([A-Z][a-z]+)?$');
+    final Match nameMatch = nameRegExp.firstMatch(recognizedText.text) as Match;
+    final String? name = nameMatch.group(0);
+
+    controller.text = name!.toString();
 
     ///End busy state
     setState(() {
