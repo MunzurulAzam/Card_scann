@@ -55,12 +55,30 @@ class _RecognizePageState extends State<RecognizePage> {
     final RecognizedText recognizedText =
          await textRecognizer.processImage(image);
 
-    final RegExp nameRegExp = RegExp(r'([A-Z][a-z]+)\s([A-Z][a-z]+)\s([A-Z][a-z]+)');
-    // final RegExp nameRegExp = RegExp(r'^([A-Z][a-z]+)\s([A-Z][a-z]+)(?:\s([A-Z]\.)\s?)?([A-Z][a-z]+)?$');
-    final Match nameMatch = nameRegExp.firstMatch(recognizedText.text) as Match;
-    final String? name = nameMatch.group(0);
 
-    controller.text = name!.toString();
+    final RegExp nameRegExp = RegExp(r'([A-Z][a-z]+)\s([A-Z][a-z]+)\s([A-Z][a-z]+)');
+
+
+
+      final Match nameMatch = nameRegExp.firstMatch(recognizedText.text) as Match;
+      final String? name = nameMatch.group(0);
+
+
+      controller.text = name!.toString();
+
+
+    final emailRegExp = RegExp(r"^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$");
+
+    final Match emailMatch = emailRegExp.firstMatch(recognizedText.text) as Match;
+
+    final String? email = emailMatch.group(0);
+
+    controller.text = email!.toString();
+
+
+
+
+
 
     ///End busy state
     setState(() {
