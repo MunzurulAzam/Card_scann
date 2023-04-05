@@ -56,25 +56,35 @@ class _RecognizePageState extends State<RecognizePage> {
          await textRecognizer.processImage(image);
 
 
-    final RegExp nameRegExp = RegExp(r'([A-Z][a-z]+)\s([A-Z][a-z]+)\s([A-Z][a-z]+)');
+    // final RegExp nameRegExp = RegExp(r'([A-Z][a-z]+)\s([A-Z][a-z]+)\s([A-Z][a-z]+)');
+    //
+    //
+    //
+    //   final Match nameMatch = nameRegExp.firstMatch(recognizedText.text) as Match;
+    //   final String? name = nameMatch.group(0);
+    //
+    //
+    //
+    //
+    //
+    // String emailRegExp = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b';
+    //
+    // RegExp regex = RegExp(emailRegExp);
+    //
+    // String? email = regex.firstMatch(recognizedText.text)?.group(0);
+    //
+    // controller.text = "$name\n$email";
+
+
+    // controller.text = email!.toString();
 
 
 
-      final Match nameMatch = nameRegExp.firstMatch(recognizedText.text) as Match;
-      final String? name = nameMatch.group(0);
+    String phoneRegExp = r'[\d]+$';
 
-
-      controller.text = name!.toString();
-
-
-    final emailRegExp = RegExp(r"^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$");
-
-    final Match emailMatch = emailRegExp.firstMatch(recognizedText.text) as Match;
-
-    final String? email = emailMatch.group(0);
-
-    controller.text = email!.toString();
-
+    RegExp phoneRegex = RegExp(phoneRegExp);
+    String? phoneNumber = phoneRegex.firstMatch(recognizedText.text)?.group(0);
+    controller.text = phoneNumber!.toString();
 
 
 
